@@ -18,7 +18,7 @@ The Task Manager API is a RESTful API for managing tasks and users in a task man
 - Express.js
 - MongoDB
 - Mongoose
-- Joi (for request body validation)
+
 
 ## Prerequisites
 
