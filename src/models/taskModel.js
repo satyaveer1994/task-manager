@@ -16,7 +16,7 @@ const taskSchema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "taskUser",
     required: true,
   },
 });

@@ -23,23 +23,23 @@ const createTask = async (req, res) => {
 // Get all tasks with optional filters
 const getAllTasks = async (req, res) => {
   try {
-    const { name, status, dueDate } = req.query;
-    const filter = {};
+    const { name, dueDate, status } = req.query;
+    const query = {};
 
     // Apply filters if provided
     if (name) {
-      filter.name = { $regex: name, $options: "i" };
+      query.name = { $regex: name, $options: "i" };
       console.log(name);
     }
+    if (dueDate) {
+      query.dueDate = new Date(dueDate);
+    }
     if (status) {
-      filter.status = status;
+      query.status = status;
       console.log(status);
     }
-    if (dueDate) {
-      filter.dueDate = { $eq: new Date(dueDate) };
-    }
 
-    const tasks = await taskModel.find(filter).populate("createdBy");
+    const tasks = await taskModel.find(query).populate("createdBy", "name");
     res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
